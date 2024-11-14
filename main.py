@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request,jsonify
 
 app = Flask(__name__)
 
@@ -6,15 +6,15 @@ app = Flask(__name__)
 def index():  
     return "Hello!"
 
-@app.route("/calc")
-def calculate(): 
+@app.route('/calc')
+def calculate():
     try:
-        a = int(request.args.get("a"))
-        b = int(request.args.get("b"))
-        result = sum(a,b)
-        return str(result)
+        a = int(request.args.get('a'))
+        b = int(request.args.get('b'))
+        result = a + b
+        return jsonify({'result': result}),200
     except ValueError:
-        return "Invalid input. Please provide integers for 'a' and 'b'."
+        return jsonify({'error': "Invalid input"}), 400
 
 
 def sum(a,b):
