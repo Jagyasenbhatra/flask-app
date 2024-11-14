@@ -1,24 +1,36 @@
-from flask import Flask, request
-
-app = Flask(__name__)
-
-@app.route("/")
-def index():  
-    return "Hello!"
-
-@app.route("/calc")
-def calculate(): 
-    try:
-        a = int(request.args.get("a"))
-        b = int(request.args.get("b"))
-        result = sum(a,b)
-        return str(result)
-    except ValueError:
-        return "Invalid input. Please provide integers for 'a' and 'b'."
+import pytest
+import app  
 
 
-def sum(a,b):
-    return a+b
+def test_index():
+    """Tests the root route ("/") which returns "Hello!"."""
+    with app.test_client() as client:
+        response = client.get("/")
+        assert response.status_code == 200
+        assert response.data == b"Hello!"
+
+
+def test_calculate_success():
+    """Tests the "/calc" route with valid integer inputs."""
+    with app.test_client() as client:
+        response = client.get("/calc?a=5&b=3")
+        assert response.status_code == 200
+        assert response.data == b"8"
+
+
+def test_calculate_invalid_input():
+    """Tests the "/calc" route with invalid input (non-integers)."""
+    with app.test_client() as client:
+      
+        response = client.get("/calc?a=hello&b=3")
+        assert response.status_code == 400  
+        assert b"Invalid input" in response.data
+
+        # Test with a string for 'b'
+        response = client.get("/calc?a=5&b=world")
+        assert response.status_code == 400
+        assert b"Invalid input" in response.data
+
 
 if __name__ == "__main__":
-    app.run(debug=True,port=5000,host='0.0.0.0') 
+    pytest.main()

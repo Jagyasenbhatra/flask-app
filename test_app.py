@@ -1,6 +1,8 @@
+import pytest
+import app
 
-from app import sum
-
-def test_sum():
-    result=sum(4,5)
-    assert result==9
+def test_hello_world():
+    with app.test_client as client:
+        response = client.get('/')
+        assert response.status_code == 200
+        assert b'Hello, World!' in response.data
