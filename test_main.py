@@ -18,5 +18,9 @@ def test_calculate_success():
         assert response.data == b"8"
 
 
+def test_calculate_invalid():
+    
+
+
 if __name__ == "__main__":
     pytest.main()
