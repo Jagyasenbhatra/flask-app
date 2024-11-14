@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: myapp
+Version: 0.1.0
+Summary: A short description of your package
+Home-page: https://github.com/Jagyasenbhatra/flask-app.git
+Author: Jack
+Author-email: example@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Dist: flask
+
+# Flask Calculation API
+
+This Flask app provides a simple API to calculate the sum of two integers.
+
+## Prerequisites
+
+- Python 3.x
+- Flask library
+
+Install Flask with:
+```bash
+pip install Flask
