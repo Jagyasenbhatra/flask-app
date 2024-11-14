@@ -1,0 +1,10 @@
+jagya:
+  name: jagya
+om:
+  name: om
+  subject:
+  - math
+  - physics
+  mark:
+   - math:30
+    physics:50
